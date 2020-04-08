@@ -38,7 +38,7 @@ public class MoodAnalyserTest {
         try {
             moodAnalyser.analyseMood();
         } catch (MoodAnalyserException e) {
-            Assert.assertEquals(MoodAnalyserException.ExceptionType.IS_NULL,e.type);
+            Assert.assertEquals(MoodAnalyserException.ExceptionType.ENTERED_NULL,e.type);
             System.out.println(e.getMessage());
         }
     }
@@ -50,7 +50,7 @@ public class MoodAnalyserTest {
         try {
             moodAnalyser.analyseMood();
         } catch (MoodAnalyserException e) {
-            Assert.assertEquals(MoodAnalyserException.ExceptionType.IS_EMPTY, e.type);
+            Assert.assertEquals(MoodAnalyserException.ExceptionType.ENTERED_EMPTY, e.type);
             System.out.println(e.getMessage());
         }
     }
@@ -111,7 +111,6 @@ public class MoodAnalyserTest {
     }
 
     /* T.C. 6.1 : Given Happy Message Using Reflection When Proper Should Return HAPPY Mood */
-
     @Test
     public void givenProperMethodName_WhenInvoked_ShouldReturnHappy() {
         try {
@@ -131,6 +130,36 @@ public class MoodAnalyserTest {
             MoodAnalyserFactory.invokeMethod(moodObject,"analyseMood1");
         } catch (MoodAnalyserException e) {
             Assert.assertEquals(MoodAnalyserException.ExceptionType.NO_SUCH_METHOD,e.type);
+        }
+    }
+
+    /* T.C. 7.1 : Set Happy Message with Reflector Should Return HAPPY */
+    @Test
+    public void givenFieldNameAndItsValue_WhenProper_ShouldReturnValue() {
+        MoodAnalyser moodObject=MoodAnalyserFactory.createMoodAnalyser();
+        String mood=MoodAnalyserFactory.setFieldValue(moodObject, "I am in Happy Mood","mood");
+        Assert.assertEquals("Happy",mood);
+    }
+
+    /* T.C. 7.2 : Set Field When Improper Should Throw Exception with No Such Field*/
+    @Test
+    public void givenFieldNameAndItsValue_WhenFieldNotFound_ShouldThrowMoodAnalyserException() {
+        try {
+            MoodAnalyser moodObject=MoodAnalyserFactory.createMoodAnalyser();
+            MoodAnalyserFactory.setFieldValue(moodObject,"Happy","mood1");
+        } catch (MoodAnalyserException e) {
+            Assert.assertEquals(MoodAnalyserException.ExceptionType.NO_SUCH_FIELD, e.type);
+        }
+    }
+
+    /* T.C. 7.3 : Setting Null Message with Reflector Should Throw Exception */
+    @Test
+    public void givenFieldNameAndNullValue_ShouldThrowMoodAnalyzerException() {
+        try {
+            MoodAnalyser moodObject=MoodAnalyserFactory.createMoodAnalyser();
+            MoodAnalyserFactory.setFieldValue(moodObject,null,"mood");
+        } catch (MoodAnalyserException e) {
+            Assert.assertEquals(MoodAnalyserException.ExceptionType.METHOD_INVOCATION_ISSUE, e.type);
         }
     }
 }

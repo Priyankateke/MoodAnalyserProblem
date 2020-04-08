@@ -21,11 +21,11 @@ public class MoodAnalyser {
             if(mood.contains("Sad")) {
                 return "Sad";
             } else if(mood.isEmpty()) {
-                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.IS_EMPTY,"Mood Cannot be Empty, Pass Valid Mood");
+                throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.ENTERED_EMPTY,"Mood Cannot be Empty, Pass Valid Mood");
             }
             return "Happy";
         } catch (NullPointerException e) {
-            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.IS_NULL,"Mood Cannot be Null, Pass Valid Mood");
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.ENTERED_NULL,"Mood Cannot be Null, Pass Valid Mood");
         }
     }
 
