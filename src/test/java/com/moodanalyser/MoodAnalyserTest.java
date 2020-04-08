@@ -98,5 +98,16 @@ public class MoodAnalyserTest {
             Assert.assertEquals(MoodAnalyserException.ExceptionType.NO_SUCH_METHOD,e.type);
         }
     }
+
+    /* T.C. 5.1 : Given MoodAnalyser When Proper Return MoodAnalyser Object */
+    @Test
+    public void givenMoodAnalyzerUsingParameterizedConstructor_whenProper_shouldReturnObject() {
+        try {
+            MoodAnalyser reflectionMoodObject = MoodAnalyserFactory.createMoodAnalyser("I am in Happy Mood");
+            Assert.assertEquals(new MoodAnalyser("I am in Happy Mood"), reflectionMoodObject);
+        } catch (MoodAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

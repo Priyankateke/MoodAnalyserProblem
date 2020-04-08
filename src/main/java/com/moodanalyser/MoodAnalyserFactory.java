@@ -17,6 +17,18 @@ public class MoodAnalyserFactory {
         return null;
     }
 
+    //For Parameterized Constructor
+    public static MoodAnalyser createMoodAnalyser(String mood) {
+        try {
+            Constructor<?> constructor=Class.forName("com.moodanalyser.MoodAnalyser").getConstructor(String.class);
+            MoodAnalyser obj=(MoodAnalyser) constructor.newInstance(mood);
+            return obj;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static Constructor<?> getConstructor(String className, Class constructor) throws MoodAnalyserException {
         try {
             Class<?> moodAnalyserClass = Class.forName(className);
