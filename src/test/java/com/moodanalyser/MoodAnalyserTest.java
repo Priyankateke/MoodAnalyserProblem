@@ -109,5 +109,29 @@ public class MoodAnalyserTest {
             e.printStackTrace();
         }
     }
+
+    /* T.C. 6.1 : Given Happy Message Using Reflection When Proper Should Return HAPPY Mood */
+
+    @Test
+    public void givenProperMethodName_WhenInvoked_ShouldReturnHappy() {
+        try {
+            MoodAnalyser moodObject=MoodAnalyserFactory.createMoodAnalyser("I am in Happy Mood");
+            String mood=MoodAnalyserFactory.invokeMethod(moodObject,"analyseMood");
+            Assert.assertEquals("Happy",mood);
+        } catch (MoodAnalyserException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* T.C. 6.2 : Given Happy Message When Improper Method Should Throw MoodAnalysisException */
+    @Test
+    public void givenMethodName_WhenNotProper_ShouldThrowMoodAnalyserException() {
+        try {
+            MoodAnalyser moodObject=MoodAnalyserFactory.createMoodAnalyser("I am in Happy Mood");
+            MoodAnalyserFactory.invokeMethod(moodObject,"analyseMood1");
+        } catch (MoodAnalyserException e) {
+            Assert.assertEquals(MoodAnalyserException.ExceptionType.NO_SUCH_METHOD,e.type);
+        }
+    }
 }
 

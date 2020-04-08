@@ -3,6 +3,7 @@ package com.moodanalyser;
 import com.moodanalyserexception.MoodAnalyserException;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 public class MoodAnalyserFactory {
     //For Default Constructor
@@ -38,5 +39,16 @@ public class MoodAnalyserFactory {
         } catch (NoSuchMethodException e) {
             throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_METHOD,e.getMessage());
         }
+    }
+
+    public static String invokeMethod(MoodAnalyser obj, String methodName) {
+        try {
+            return (String) obj.getClass().getDeclaredMethod(methodName).invoke(obj);
+        } catch (NoSuchMethodException e) {
+            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_METHOD, e.getMessage());
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
