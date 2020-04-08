@@ -7,6 +7,7 @@ public class MoodAnalyser {
 
     /* Default Constructor*/
     public MoodAnalyser() {
+        mood="default";
     }
 
     /* Parameterized Constructor*/
@@ -26,6 +27,13 @@ public class MoodAnalyser {
         } catch (NullPointerException e) {
             throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.IS_NULL,"Mood Cannot be Null, Pass Valid Mood");
         }
+    }
 
+    /* Comparing two objects*/
+    @Override
+    public boolean equals(Object another) {
+        if(this.mood.equals(((MoodAnalyser)another).mood))
+            return true;
+        return false;
     }
 }
