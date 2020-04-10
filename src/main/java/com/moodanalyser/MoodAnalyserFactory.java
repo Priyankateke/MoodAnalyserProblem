@@ -42,9 +42,9 @@ public class MoodAnalyserFactory {
         }
     }
 
-    public static String invokeMethod(MoodAnalyser obj, String methodName) {
+    public static String invokeMethod(MoodAnalyser object, String methodName) {
         try {
-            return (String) obj.getClass().getDeclaredMethod(methodName).invoke(obj);
+            return (String) object.getClass().getDeclaredMethod(methodName).invoke(object);
         } catch (NoSuchMethodException e) {
             throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_METHOD, e.getMessage());
         } catch (IllegalAccessException | InvocationTargetException e) {
@@ -53,12 +53,12 @@ public class MoodAnalyserFactory {
         return null;
     }
 
-    public static String setFieldValue(MoodAnalyser obj, String message, String fieldName) {
+    public static String setFieldValue(MoodAnalyser object, String message, String fieldName) {
         try {
-            Field field=obj.getClass().getDeclaredField(fieldName);
+            Field field=object.getClass().getDeclaredField(fieldName);
             field.setAccessible(true);
-            field.set(obj,message);
-            return (String) obj.getClass().getDeclaredMethod("analyseMood").invoke(obj);
+            field.set(object,message);
+            return (String) object.getClass().getDeclaredMethod("analyseMood").invoke(object);
         } catch (NoSuchFieldException e) {
             throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.NO_SUCH_FIELD, e.getMessage());
         } catch (IllegalAccessException | NoSuchMethodException e) {
