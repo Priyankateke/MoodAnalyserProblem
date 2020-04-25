@@ -12,8 +12,8 @@ public class MoodAnalyserTest {
     /* TC 1.1 : Given I am in Sad Mood message in Constructor Should Return Sad */
     @Test
     public void givenMessageInConstructor_WhenContainSadMood_ShouldReturnSad() {
-        moodAnalyser=new MoodAnalyser("I am in Sad Mood");
         try {
+            moodAnalyser=new MoodAnalyser("I am in Sad Mood");
             Assert.assertEquals("Sad", moodAnalyser.analyseMood());
         } catch (MoodAnalyserException e) {
             e.printStackTrace();
@@ -23,8 +23,8 @@ public class MoodAnalyserTest {
     /* T.C. 1.2 : Given I am in Happy Mood message in Constructor Should Return Happy */
     @Test
     public void givenMessageInConstructor_WhenContainHappyMood_ShouldReturnHappy() {
-        moodAnalyser=new MoodAnalyser("I am in Happy Mood");
         try {
+            moodAnalyser=new MoodAnalyser("I am in Happy Mood");
             Assert.assertEquals("Happy", moodAnalyser.analyseMood());
         } catch (MoodAnalyserException e) {
             e.printStackTrace();
@@ -34,8 +34,8 @@ public class MoodAnalyserTest {
     /* T.C. 3.1 : Given NULL Mood Should Throw MoodAnalysisException */
     @Test
     public void givenMessageInConstructor_WhenNull_ShouldThrowMoodAnalyserException() {
-        moodAnalyser = new MoodAnalyser(null);
         try {
+            moodAnalyser = new MoodAnalyser(null);
             moodAnalyser.analyseMood();
         } catch (MoodAnalyserException e) {
             Assert.assertEquals(MoodAnalyserException.ExceptionType.ENTERED_NULL,e.type);
@@ -45,8 +45,8 @@ public class MoodAnalyserTest {
     /* T.C. 3.2 : Given Empty Mood Should Throw MoodAnalysisException indicating Empty Mood */
     @Test
     public void givenMessageInConstructor_WhenEmpty_ShouldThrowMoodAnalyserException() {
-        moodAnalyser=new MoodAnalyser("");
         try {
+            moodAnalyser=new MoodAnalyser("");
             moodAnalyser.analyseMood();
         } catch (MoodAnalyserException e) {
             Assert.assertEquals(MoodAnalyserException.ExceptionType.ENTERED_EMPTY, e.type);
